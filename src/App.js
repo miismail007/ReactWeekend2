@@ -1,51 +1,47 @@
-import React from 'react'
-import Header from './Components/Header/Header'
-import ProductsContainer from './Components/Products/ProductsContainer'
+import React, { useState } from 'react'
+// import SimpleProducts from './SimpleProducts/SimpleProducts'
 
 function App() {
-  const logo = "FlipKart"
-  const menu = ["Home", "About", "Services","Contact"]
-  const products = [
-    {
-      id : 1,
-      name : "Samsung s20",
-      description : "Recent flagship mobile from samsung",
-      image : "https://www.freeiconspng.com/thumbs/iphone-x-pictures/apple-iphone-x-pictures-5.png",
-      price : 45000
-    },
-    {
-      id : 2,
-      name : "One Plus 10 pro",
-      description : "Recent flagship mobile from One Plus",
-      image : "https://www.freeiconspng.com/thumbs/iphone-x-pictures/apple-iphone-x-pictures-5.png",
-      price : 45000
-    },
-    {
-      id : 3,
-      name : "Oppo a7",
-      description : "Recent flagship mobile from Oppo",
-      image : "https://www.freeiconspng.com/thumbs/iphone-x-pictures/apple-iphone-x-pictures-5.png",
-      price : 45000
-    },
-    {
-      id : 4,
-      name : "Vivo v20",
-      description : "Recent flagship mobile from Vivo",
-      image : "https://www.freeiconspng.com/thumbs/iphone-x-pictures/apple-iphone-x-pictures-5.png",
-      price : 45000
-    },
-    {
-      id : 5,
-      name : "Redmi k20",
-      description : "Recent flagship mobile from Redmi",
-      image : "https://www.freeiconspng.com/thumbs/iphone-x-pictures/apple-iphone-x-pictures-5.png",
-      price : 45000
-    }
-  ]
+  const [logo , setLogo] = useState("")
+  const [ textToDisplay , setTextToDisplay ] = useState("")
+  const [ menu , setMenu ] = useState([])
+  const [ menuInput , setMenuInput] = useState("")
+  const [ counter , setCounter ] = useState(0)
   return (
     <div>
-      <Header logo={logo} menu={menu}/>
-      <ProductsContainer products = {products}/>
+      <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+          <a className="navbar-brand" href="https://youtube.com">{logo} {counter}</a>
+          <ul className="navbar-nav">
+              {menu.map((data)=>{
+                  return <li key={Math.random()} className="nav-item">
+                              <a className="nav-link" href="https://youtube.com">{data}</a>
+                          </li>
+              })}
+              
+          </ul>
+      </nav>
+      <h1>{textToDisplay}</h1>
+      <input onChange={(text)=>{
+        setTextToDisplay(text.target.value)
+        setLogo(text.target.value)
+      }}/>
+
+      <h1>{counter}</h1>
+      <button onClick={()=>{
+        setCounter(counter + 1)
+      }}>+</button>
+      <button onClick={()=>{
+        setCounter(counter - 1)
+      }}>-</button>
+      <br/>
+      <input value={menuInput} onChange={(text)=>{
+        setMenuInput(text.target.value)
+      }} placeholder="Enter Menu text"/>
+      <button onClick={()=>{
+        setMenu([...menu,menuInput])
+        setMenuInput("")
+      }}>add menu</button>
+
     </div>
   )
 }
