@@ -1,15 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
     return (
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a className="navbar-brand" href="https://youtube.com">GitFinder</a>
+            <Link className="navbar-brand" to="/">GitFinder</Link>
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <a className="nav-link" href="https://youtube.com">Home</a>
+                    <Link className="nav-link" to="/">Home</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="https://youtube.com">About</a>
+                    <Link className="nav-link" to="/about">About</Link>
                 </li>
 
             </ul>
