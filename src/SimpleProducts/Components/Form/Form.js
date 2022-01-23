@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Form(props) {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")
-    const [image, setImage] = useState("")
+    const [id, setId] = useState("")
+
+    useEffect(() => {
+        if (props.formData.id) {
+            setName(props.formData.name)
+            setDescription(props.formData.description)
+            setPrice(props.formData.price)
+            setId(props.formData.id)
+        }
+    }, [props.formData.id])
     return (
         <div className="container">
             <form onSubmit={(e) => {
@@ -13,13 +22,16 @@ function Form(props) {
                 data.name = name
                 data.description = description
                 data.price = price
-                data.image = image
-                data.id = Math.trunc(Math.random() * 200) + 1;
-                props.formSubmit(data)
+                if (props.formData.id) {
+                    data.id = id;
+                    props.formSubmit("update", data)
+                } else {
+                    data.id = Math.trunc(Math.random() * 200) + 1;
+                    props.formSubmit("add", data)
+                }
                 setName("")
                 setDescription("")
                 setPrice("")
-                setImage("")
             }}>
                 <div className="form-group">
                     <label htmlFor="email">Product Name : </label>

@@ -8,7 +8,9 @@ function Product(props) {
                 <h4 className="card-title">{data.name}</h4>
                 <p className="card-text">{data.description}</p>
                 <p className="card-text">{data.price}</p>
-                <button className="btn btn-primary mr-2">Update</button>
+                <button className="btn btn-primary mr-2" onClick={()=>{
+                    props.setFormForUpdate(data)
+                }}>Update</button>
                 <button className="btn btn-danger" onClick={()=>{
                 <button className="btn btn-danger" onCanPlay>Delete</button>
                     props.removeProduct(data.id)

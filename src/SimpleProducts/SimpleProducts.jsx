@@ -7,9 +7,24 @@ function SimpleProducts() {
     const logo = "FlipKart"
     const menu = ["Home", "About", "Services","Contact"]
     const [ products , setProducts ] =  useState([])
+    const [ formData , setFormData ] = useState({})
 
-    const formSubmit = (data) => {
-        setProducts([...products,data])
+    const formSubmit = (type,data) => {
+        console.log(type,data);
+        if(type === "add"){
+            setProducts([...products,data])
+        }else{
+            let newProducts = products
+            newProducts.map(product => {
+                if(product.id === data.id){
+                    product.name = data.name
+                    product.description = data.description
+                    product.price = data.price
+                }
+            })
+            setProducts(newProducts);
+            setFormData({})
+        }        
     }
 
     const removeProduct = (id) => {
@@ -21,11 +36,15 @@ function SimpleProducts() {
         })
         setProducts(newProducts)
     }
+
+    const setFormForUpdate = (data) => {
+        setFormData(data)
+    }
     return (
         <div>
             <Header logo={logo} menu={menu}/>
-            <Form formSubmit = {formSubmit}/>
-            <ProductsContainer products = {products} removeProduct={removeProduct}/>
+            <Form formSubmit = {formSubmit} formData={formData}/>
+            <ProductsContainer products = {products} removeProduct={removeProduct} setFormForUpdate={setFormForUpdate}/>
         </div>
     )
 }
