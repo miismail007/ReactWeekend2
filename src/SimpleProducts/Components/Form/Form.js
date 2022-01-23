@@ -14,7 +14,7 @@ function Form(props) {
                 data.description = description
                 data.price = price
                 data.image = image
-                data.id = Math.random()
+                data.id = Math.trunc(Math.random() * 200) + 1;
                 props.formSubmit(data)
                 setName("")
                 setDescription("")
@@ -38,12 +38,6 @@ function Form(props) {
                     <input type="text" className="form-control" placeholder="Enter Price" id="email"
                         onChange={(text) => { setPrice(text.target.value) }}
                         value={price} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Image URL : </label>
-                    <input type="text" className="form-control" placeholder="Enter Image URL" id="email"
-                        onChange={(text) => { setImage(text.target.value) }}
-                        value={image} />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

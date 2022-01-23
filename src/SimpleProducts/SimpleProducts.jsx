@@ -7,20 +7,25 @@ function SimpleProducts() {
     const logo = "FlipKart"
     const menu = ["Home", "About", "Services","Contact"]
     const [ products , setProducts ] =  useState([])
-    const [text , setText] = useState("")
 
     const formSubmit = (data) => {
         setProducts([...products,data])
     }
 
-    useEffect(()=>{
-        setText(Math.random())
-    },[products])
+    const removeProduct = (id) => {
+        let newProducts = []
+        products.forEach((singleProduct)=>{
+            if(id !== singleProduct.id){
+                newProducts.push(singleProduct)
+            }
+        })
+        setProducts(newProducts)
+    }
     return (
         <div>
-            <Header logo={text} menu={menu}/>
+            <Header logo={logo} menu={menu}/>
             <Form formSubmit = {formSubmit}/>
-            <ProductsContainer products = {products}/>
+            <ProductsContainer products = {products} removeProduct={removeProduct}/>
         </div>
     )
 }
